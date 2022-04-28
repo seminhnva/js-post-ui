@@ -3,7 +3,7 @@ import axiosClient from './axiosClient';
 const postApi = {
   getAll(params) {
     const url = '/posts';
-    return axiosClient.get(url, { params , baseURL:'htts.com'});
+    return axiosClient.get(url, { params });
   },
   getById(id) {
     const url = `/posts/${id}`;

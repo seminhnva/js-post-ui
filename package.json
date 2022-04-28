@@ -11,6 +11,7 @@
     "vite": "^2.9.5"
   },
   "dependencies": {
+    "dayjs": "^1.11.1",
     "serve": "^13.0.2"
   }
 }
