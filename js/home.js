@@ -91,7 +91,7 @@ async function handleFilterChange(filterName, filterValue) {
     renderPostList(data);
     renderPagination(pagination);
   } catch (error) {
-      console.log('fail to fetch post list',error)
+    console.log('fail to fetch post list', error);
   }
 }
 
@@ -141,6 +141,9 @@ function initURL() {
 
   history.pushState({}, '', url);
 }
+
+//  STEP 3 - SEARCH
+
 (async () => {
   try {
     //attach click event for links
