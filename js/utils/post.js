@@ -25,6 +25,13 @@ export function createPostElement(post) {
     // cuculate time span
 
     //attach event
+    // goto post detail when click on div.post-item
+    const divElement = liElement.firstElementChild;
+    if(divElement) {
+      divElement.addEventListener('click',()=>{
+        window.location.assign(`/post-detail.html?id=${post.id}`)
+      })
+    }
 
     return liElement;
   } catch (error) {
@@ -33,7 +40,7 @@ export function createPostElement(post) {
   // find n clone template
 }
 
-export function renderPostList(elementId,postList) {
+export function renderPostList(elementId, postList) {
   if (!Array.isArray(postList)) return;
 
   const ulElement = document.getElementById(elementId);

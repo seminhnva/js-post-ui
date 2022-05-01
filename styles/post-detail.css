@@ -23,4 +23,6 @@ section.hero {
 .post-detail .post-image {
   width: 100%;
   margin-bottom: 1rem;
+  cursor: pointer;
+  object-fit: cover;
 }
