@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "dayjs": "^1.11.1",
+    "lodash.debounce": "^4.0.8",
     "serve": "^13.0.2"
   }
 }
