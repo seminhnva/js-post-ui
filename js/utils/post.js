@@ -27,12 +27,25 @@ export function createPostElement(post) {
     //attach event
     // goto post detail when click on div.post-item
     const divElement = liElement.firstElementChild;
-    if(divElement) {
-      divElement.addEventListener('click',()=>{
-        window.location.assign(`/post-detail.html?id=${post.id}`)
-      })
+    if (divElement) {
+      divElement.addEventListener('click', (e) => {
+        //if event is triggered from menu -> ignore
+        const menu = liElement.querySelector('[data-id="menu"]');
+        if (menu && menu.contains(e.target)) return;
+        window.location.assign(`/post-detail.html?id=${post.id}`);
+      });
     }
 
+    //add click event for edit button
+    const editButton = liElement.querySelector('[data-id="edit"]');
+    if (editButton) {
+      editButton.addEventListener('click', (event) => {
+        //stop event bubling;
+        // event.stopPropagation();
+
+        window.location.assign(`/add-edit-post.html?id=${post.id}`);
+      });
+    }
     return liElement;
   } catch (error) {
     console.log('fall to create post', error);
