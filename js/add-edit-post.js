@@ -1,4 +1,9 @@
 import postApi from './api/postApi';
+import { initPostForm } from './utils';
+
+function onSubmit(formValue) {
+    console.log(formValue);
+}
 
 (async () => {
   try {
@@ -15,7 +20,11 @@ import postApi from './api/postApi';
           imageUrl: '',
         };
 
-    console.log(defaultValues);
+    initPostForm({
+      formId: 'postForm',
+      defaultValue: defaultValues,
+      onSubmit: (formValue) => onSubmit(formValue),
+    });
   } catch (error) {
     console.log(error);
   }
