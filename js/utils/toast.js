@@ -1,0 +1,44 @@
+import Toastify from 'toastify-js';
+import 'toastify-js/src/toastify.css';
+
+export const toast = {
+  info(messsage) {
+    Toastify({
+      text: messsage,
+      duration: 5000,
+      gravity: 'top', // `top` or `bottom`
+      position: 'right', // `left`, `center` or `right`
+      close:true,
+      style: {
+        background: '#03a9f4',
+      },
+      onClick: function () {}, // Callback after click
+    }).showToast();
+  },
+  success(messsage) {
+    Toastify({
+      text: messsage,
+      duration: 5000,
+      gravity: 'top', // `top` or `bottom`
+      position: 'right', // `left`, `center` or `right`
+      close:true,
+      style: {
+        background: '#4caf50',
+      },
+      onClick: function () {}, // Callback after click
+    }).showToast();
+  },
+  error(messsage) {
+    Toastify({
+      text: messsage,
+      duration: 5000,
+      gravity: 'top', // `top` or `bottom`
+      position: 'right', // `left`, `center` or `right`
+      close:true,
+      style: {
+        background: '#ef5350',
+      },
+      onClick: function () {}, // Callback after click
+    }).showToast();
+  },
+};

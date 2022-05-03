@@ -1,7 +1,7 @@
 import postApi from './api/postApi';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
-import { initPagination, initSearch, renderPagination, renderPostList } from './utils';
+import { initPagination, initSearch, renderPagination, renderPostList, toast } from './utils';
 
 //to use fromNow
 dayjs.extend(relativeTime);
@@ -13,7 +13,7 @@ async function handleFilterChange(filterName, filterValue) {
   try {
     // update query params
     const url = new URL(window.location);
-    url.searchParams.set(filterName, filterValue);
+    if (filterName) url.searchParams.set(filterName, filterValue);
     //reset page if needed
     if (filterName === 'title_like') url.searchParams.set('_page', 1);
 
@@ -41,10 +41,34 @@ function getDefaultParams() {
 
 //  STEP 3 - SEARCH
 
+//delte
+async function registerPostDeleteEvent() {
+  document.addEventListener('post-delete', async (e) => {
+    //call api remove
+    const post = e.detail;
+    try {
+      let mess = `Are you sure to remove this post ${post.title}?`;
+      if (window.confirm(mess)) {
+        console.log(post.id);
+        await postApi.remove(post.id);
+        await handleFilterChange();
+
+        toast.success('remove post successfully');
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error(`remove post fail :${error.message}`);
+    }
+    //refetch
+  });
+}
 (async () => {
   try {
     // set default pagination(_page,_limit) on url
     const queryParams = getDefaultParams();
+
+    registerPostDeleteEvent();
+
     //render post list base url params
     // const queryParams = new URLSearchParams(window.location.search);
     //attach click event for links
@@ -60,11 +84,7 @@ function getDefaultParams() {
       onChange: (value) => handleFilterChange('title_like', value),
     });
 
-
-    const { data, pagination } = await postApi.getAll(queryParams);
-    renderPostList('postList',data);
-    renderPagination('pagination', pagination);
-
+    handleFilterChange();
   } catch (error) {
     // console.log(error)
   }

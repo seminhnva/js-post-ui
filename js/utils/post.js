@@ -46,6 +46,17 @@ export function createPostElement(post) {
         window.location.assign(`/add-edit-post.html?id=${post.id}`);
       });
     }
+    //remove button
+    const removeButton = liElement.querySelector('[data-id="remove"]');
+    if (removeButton) {
+      removeButton.addEventListener('click', (event) => {
+        const customEvent = new CustomEvent('post-delete', {
+          bubbles: true,
+          detail: post,
+        });
+        removeButton.dispatchEvent(customEvent);
+      });
+    }
     return liElement;
   } catch (error) {
     console.log('fall to create post', error);
